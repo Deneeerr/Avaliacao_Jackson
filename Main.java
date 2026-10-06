@@ -21,7 +21,7 @@ public class Main {
             System.out.println("  2. Consultar robos");
             System.out.println("  3. Realizar combate");
             System.out.println("  4. Recuperar energia ");
-            System.out.println("  5. Rodada geral");
+            System.out.println("  5. Excluir robô");
             System.out.println("---------------------------------");
             System.out.println("Digite a operação: ");
             opt = buscarOperacao(s);
