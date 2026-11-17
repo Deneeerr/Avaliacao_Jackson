@@ -73,7 +73,7 @@ public class Main {
                                 System.out.println("Digite o ataque do robo: ");
                                 ataque = s.nextInt();
 
-                                if (ataque < 10 && ataque > 30) {
+                                if (ataque < 10 || ataque > 30) {
                                     System.out.println("Ataque inválido!");
                                 }
 
@@ -92,7 +92,7 @@ public class Main {
                                 System.out.println("Digite o defesa do robo: ");
                                 defesa = s.nextInt();
 
-                                if (defesa < 0 && defesa > 20) {
+                                if (defesa < 0 || defesa > 20) {
                                     System.out.println("Defesa inválido!");
                                 }
 
@@ -105,7 +105,7 @@ public class Main {
                         } while (defesa < 0 || defesa > 20);
 
                         switch (opcao) {
-                            //Cria o robô com base no numero escolhido pelo usuário
+                            // Cria o robô com base no numero escolhido pelo usuário
                             case 1:
                                 robo = new RoboOfensivo(codigo, nome, ataque, defesa, 100, 0, 0, 0);
                                 break;
@@ -173,7 +173,7 @@ public class Main {
                     Robo robo2 = null;
 
                     for (Robo r : robos) {
-                              //puxa o método para ter acesso ao valor do código
+                        // puxa o método para ter acesso ao valor do código
                         if (r.codigo() == codigo1) {
                             robo1 = r;
                         }
@@ -195,7 +195,7 @@ public class Main {
 
                     Robo primeiro;
                     Robo segundo;
-                              //puxa o método para ter acesso ao código
+                    // puxa o método para ter acesso ao código
                     if (robo1.ponto() == robo2.ponto()) {
 
                         primeiro = robo1.codigo() > robo2.codigo() ? robo2 : robo1;
@@ -216,11 +216,19 @@ public class Main {
 
                         System.out.println("Rodada " + i + "ª: ");
 
-                        int dano = primeiro.ataque() - segundo.defesa();
+                        System.out.println("Primeiro robô: " + primeiro.nome());
+                        System.out.println("Segundo robô: " + segundo.nome());
+
+                        int ataque = primeiro.ataque();
+                        System.out.println("Ataque obtido: " + ataque);
+
+                        int defesa = segundo.defesa();
+                        System.out.println("Defesa obtida: " + defesa);
+
+                        int dano = ataque - defesa;
 
                         if (dano < 0) {
                             dano = 0;
-
                         } else if (dano < 5) {
                             dano = 5;
                         }
@@ -228,16 +236,12 @@ public class Main {
                         if (i % 2 == 0) {
                             dano += 5;
                         }
-                                //Usa set para modificar a energia inicial do robô
-                        segundo.setEnergia(segundo.energia() - dano);
 
-                        if (segundo.energia() < 0) {
-                            segundo.setEnergia(0);
-                        }
+                        System.out.println("Dano calculado: " + dano);
 
-                        if (segundo.energia() == 0) {
-                            break;
-                        }
+                        segundo.setEnergia(Math.max(0, segundo.energia() - dano));
+
+                        System.out.println("Energia restante: " + segundo.energia());
 
                         primeiro.Consultar();
                         segundo.Consultar();
